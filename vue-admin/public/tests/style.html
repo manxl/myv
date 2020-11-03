@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>style</title>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <style>
+      .active {
+        width: 100px;
+        height: 100px;
+        background: yellowgreen;
+      }
+      .text-danger {
+        background: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="switchBlock">1111111</button>
+      <hr />
+      A:
+      <div v-bind:class="{'active':isActive}"></div>
+      <hr />
+      B:
+      <div v-bind:class="classObj"></div>
+      <hr />
+      C:
+      <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">
+        菜鸟教程
+      </div>
+      <hr />
+      D:
+      <div v-bind:style="styleObject">菜鸟教程</div>
+      <hr />
+      E:
+      <div v-bind:style="[classObj,styleObject]">菜鸟教程</div>
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          isActive: false,
+          classObj: { active: true, "text-danger": true },
+          activeColor: "red",
+          fontSize: 30,
+          styleObject:{
+            color: 'green',
+            fontSize: 50
+          }
+        },
+        methods: {
+          switchBlock: function() {
+            this.isActive = !this.isActive;
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

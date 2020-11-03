@@ -1,0 +1,106 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <p v-if="seen">现在你看到我了</p>
+      <template v-if="ok">
+        <h1>菜鸟教程</h1>
+        <p>学的不仅是技术，更是梦想！</p>
+        <p>哈哈哈，打字辛苦啊！！！</p>
+      </template>
+      <a @click="ck">aaa</a>
+
+      <div v-if="Math.random() > 0.5">
+        Sorry
+      </div>
+      <div v-else>
+        Not sorry
+      </div>
+      <div v-if="type === 'A'">
+        A
+      </div>
+      <div v-else-if="type === 'B'">
+        B
+      </div>
+      <div v-else-if="type === 'C'">
+        C
+      </div>
+      <div v-else>
+        Not A/B/C
+      </div>
+      ==========================<br />
+      <div>
+        <ol>
+          <li v-for="site in sites">
+            {{ site.name}}
+          </li>
+          <template v-for="site in sites">
+            <li>{{ site.name }}</li>
+            <li>--------------</li>
+          </template>
+          <template v-for="(value, key, index) in oo">
+            <li>{{ index }}. {{ key }} : {{ value }}</li>
+            <li>--------------</li>
+          </template>
+          <template v-for="n in 10">
+            <li>{{ n }}</li>
+          </template>
+        </ol>
+      </div>
+      ======================compute
+      <div>
+        {{ myCompute}}
+        <br>
+        {{ site }}
+      </div>
+    </div>
+
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data: {
+          seen: false,
+          ok: true,
+          type: "A",
+          sites: [{ name: "Runoob" }, { name: "Google" }, { name: "Taobao" }],
+          oo: {
+            seen: false,
+            ok: true,
+            type: "A",
+            sites: [{ name: "Runoob" }, { name: "Google" }, { name: "Taobao" }]
+          },
+          name: 'Google',
+	        url: 'http://www.google.com'
+        },
+        methods: {
+          ck: function() {
+            this.seen = !this.seen;
+            this.ok = !this.ok;
+          }
+        },
+        computed:{
+          myCompute: function(){
+            return this.seen + '' + this.seen
+          },
+          site:{
+            get: function (){
+              console.log('get')
+              return this.name + ' ' + this.url
+            },
+            set: function(newValue){
+              console.log('set'+newValue)
+              var names = newValue.split(' ')
+              this.name = names[0]
+              this.url = names[names.length -1]
+            }
+          }
+        }
+      });
+      vm.site = 'wowowo http://www.baidu.com';
+    </script>
+  </body>
+</html>
